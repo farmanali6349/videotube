@@ -11,7 +11,7 @@ app.use(
   cors({
     origin: cors_origin,
     credentials: true,
-  }),
+  })
 );
 app.use(cookieParser());
 app.use(express.static("public"));
@@ -33,5 +33,11 @@ app.get("/", (req, res) => {
 <body><h1>Server Is Ready</h1></body>
 </html>`);
 });
+
+// routers import
+import userRouter from "./routes/user.router.js";
+
+// router routes
+app.use("/api/v1/user", userRouter);
 
 export { app };

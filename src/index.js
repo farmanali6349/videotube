@@ -6,6 +6,7 @@ import debugLib from "debug";
 dotenv.config({ path: "./env" });
 
 const debug = debugLib("development:index.js");
+
 async function main() {
   await connectDb();
 
