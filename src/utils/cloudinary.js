@@ -6,7 +6,7 @@ import {
   cloudinary_api_key,
   cloudinary_api_secret,
   cloudinary_cloud_name,
-} from "../constants";
+} from "../constants.js";
 
 const debug = debugLib("development:cloudinary.js");
 
@@ -39,7 +39,7 @@ async function uploadOnCloudinary(localFilePath, folder = "videotube/misc") {
       folder,
     });
 
-    debug("File uploaded successfully. link: ", response.url);
+    fs.unlinkSync(localFilePath);
 
     return response;
   } catch (error) {

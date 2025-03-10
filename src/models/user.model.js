@@ -6,7 +6,7 @@ import {
   access_token_expiry,
   refresh_token_secret,
   refresh_token_expiry,
-} from "../constants";
+} from "../constants.js";
 const userSchema = new Schema(
   {
     username: {
@@ -53,7 +53,7 @@ const userSchema = new Schema(
       type: String,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 userSchema.pre("save", async function (next) {
@@ -80,7 +80,7 @@ userSchema.methods.generateAccessToken = function () {
       name: this.name,
     },
     access_token_secret,
-    { expiresIn: access_token_expiry },
+    { expiresIn: access_token_expiry }
   );
 };
 
@@ -90,7 +90,7 @@ userSchema.methods.generateRefreshToken = function () {
       id: this._id,
     },
     refresh_token_secret,
-    { expiresIn: refresh_token_expiry },
+    { expiresIn: refresh_token_expiry }
   );
 };
 

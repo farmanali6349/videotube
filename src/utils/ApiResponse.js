@@ -5,6 +5,15 @@ class ApiResponse {
     this.message = message;
     this.success = statusCode <= 200;
   }
+
+  toJSON() {
+    return {
+      status: this.statusCode,
+      data: this.data,
+      message: this.message,
+      success: this.success,
+    };
+  }
 }
 
 export { ApiResponse };

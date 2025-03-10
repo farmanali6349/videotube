@@ -6,15 +6,15 @@ import { cors_origin } from "./constants.js";
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: cors_origin,
     credentials: true,
   })
 );
-app.use(cookieParser());
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send(`
