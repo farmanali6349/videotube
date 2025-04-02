@@ -42,12 +42,12 @@ const userSchema = new Schema(
     ],
     avatar: {
       type: String,
-      default: "user.png",
+      default: "",
       required: true,
     },
     coverImage: {
       type: String,
-      default: "cover.png",
+      default: "",
     },
     refreshToken: {
       type: String,
@@ -74,7 +74,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
 userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
-      id: this._id,
+      _id: this._id,
       username: this.username,
       email: this.email,
       name: this.name,
@@ -87,7 +87,7 @@ userSchema.methods.generateAccessToken = function () {
 userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
-      id: this._id,
+      _id: this._id,
     },
     refresh_token_secret,
     { expiresIn: refresh_token_expiry }

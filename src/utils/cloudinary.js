@@ -48,5 +48,36 @@ async function uploadOnCloudinary(localFilePath, folder = "videotube/misc") {
     return null;
   }
 }
+async function deleteFromCloudinary(fileUrl, folder = "videotube/misc") {
+  try {
+    if (!fileUrl) {
+      debug("File is not provided");
+      return null;
+    }
 
-export { uploadOnCloudinary };
+    const [publid_id, fileExtension] = fileUrl
+      .split("/")
+      .splice(-1)[0]
+      .split(".");
+
+    // Determining the folder
+    const videoExtensions = ["mp4", "avi", "mov", "mkv"];
+    const photoExtensions = ["jpg", "jpeg", "png", "gif", "webp"];
+
+    if (videoExtensions.includes(fileExtension)) {
+      folder = "videotube/videos";
+    } else if (photoExtensions.includes(fileExtension)) {
+      folder = "videotube/photos";
+    }
+
+    const fullPublicId = `${folder}/${publid_id}`;
+    const response = await cloudinary.uploader.destroy(fullPublicId);
+
+    return response;
+  } catch (error) {
+    debug("Error Deleting the file from cloudinary", error);
+    return null;
+  }
+}
+
+export { uploadOnCloudinary, deleteFromCloudinary };

@@ -8,7 +8,7 @@ dotenv.config({ path: "./env" });
 const debug = debugLib("development:index.js");
 
 async function main() {
-  await connectDb();
+  connectDb();
 
   app.listen(port, () => {
     console.log(`Server is listening at port http://localhost:${port}`);
